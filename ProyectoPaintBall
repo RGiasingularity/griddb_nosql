@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RotacionPaletaIZq : MonoBehaviour
+{
+    public   float anguloRotacione = 0.0f;
+
+    private void Start()
+    {
+        
+    }
+
+
+    void Update()
+    {
+        Rotacion();
+    }
+
+    private void Rotacion()
+    {
+
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            anguloRotacione += 1.0f;
+            
+            gameObject.GetComponent<Rigidbody>().AddTorque(Vector3.up*anguloRotacione, ForceMode.Acceleration);
+            Invoke("Retorna", 0.1f);
+            
+        }
+        else if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            anguloRotacione -= 1.0f;
+            gameObject.GetComponent<Rigidbody>().AddTorque((Vector3.up)*anguloRotacione, ForceMode.Acceleration);
+        }
+
+
+
+    }
+
+    public void Retorna()
+    {
+        gameObject.transform.Rotate(Vector3.up * -2.0f, Space.World);
+    }
+}
